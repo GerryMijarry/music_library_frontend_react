@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import SongTable from './SongTable/SongTable';
+import TableHeader from './TableHeader/TableHeader';
 
 import axios from "axios";
-
-
 
 class App extends Component {
     constructor(props) {
@@ -13,26 +12,32 @@ class App extends Component {
         
         
         this.state = {
-           songs: []
-
-
+           songs: [],
         }
     }
 
 
-    getAllSongs = () => {
-        axios.get('http://127.0.0.1:8000/music/')
-        .then((response) => this.setState({
-            songs: response.data
-        }));
+    getAllSongs = async () => {
+        let response = await axios.get('http://127.0.0.1:8000/music/')
+        this.setState({
+            songs : response.data
+        });
         
+    }
+
+    deleteSong = async (songId) => {
+        let response = await axios.delete('http://127.0.0.1:8000/music/' + songId + '/')
+        this.getAllSongs(); 
+        return response.status; 
+         
     }
     
 
     render() {
         return (
             <div className="container-fluid">
-                <SongTable songs={this.state.songs} getSongs={this.getAllSongs} />
+                <TableHeader getSongs={this.getAllSongs}/>
+                <SongTable songs={this.state.songs}  deleteASong={this.deleteSong}/>
             </div>
         )
     }
