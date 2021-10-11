@@ -20,19 +20,21 @@ class SongTable extends Component {
       <div>
         {this.props.songs.map((item) => {
           return (
+            <form onSubmit={this.deleteSubmit}>
+            <table>
             <tr>
-              <input name="song_id" value={item.id} />
+              <input readOnly name="song_id" value={item.id}/>
               <td>{item.title}</td>
               <td>{item.album}</td>
               <td>{item.artist}</td>
               <td>{item.genre}</td>
               <td>{item.release_date}</td>
               <td>
-                <form onSubmit={this.deleteSubmit}>
                   <button type="submit">Delete</button>
-                </form>
               </td>
             </tr>
+            </table>
+            </form>
           );
         })}
       </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SongTable from './SongTable/SongTable';
 import TableHeader from './TableHeader/TableHeader';
+import SongCreateForm from './SongCreateForm/SongCreateForm';
 
 import axios from "axios";
 
@@ -16,6 +17,9 @@ class App extends Component {
         }
     }
 
+    componentDidMount = () => {
+        this.getAllSongs();
+    }
 
     getAllSongs = async () => {
         let response = await axios.get('http://127.0.0.1:8000/music/')
@@ -31,6 +35,13 @@ class App extends Component {
         return response.status; 
          
     }
+
+    createSong = async (newSong) => {
+        let response = await axios.post('http://127.0.0.1:8000/music/', newSong)
+        this.getAllSongs(); 
+        return response.status; 
+         
+    }
     
 
     render() {
@@ -38,6 +49,7 @@ class App extends Component {
             <div className="container-fluid">
                 <TableHeader getSongs={this.getAllSongs}/>
                 <SongTable songs={this.state.songs}  deleteASong={this.deleteSong}/>
+                <SongCreateForm createASong={this.createSong}/>
             </div>
         )
     }

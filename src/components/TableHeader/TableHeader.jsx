@@ -18,19 +18,15 @@ class TableHeader extends Component {
   render() {
     return (
       <div>
-      <form onSubmit={this.getSubmit}>
-            <button type="submit">Get Songs</button>
-      </form>
-      
       <table>
         <tr>
-          <th>ID</th>
-          <th>TITLE</th>
-          <th>ALBUM</th>
-          <th>ARTIST</th>
-          <th>GENRE</th>
-          <th>RELEASE DATE</th>
-          <th>DELETE</th>
+          <td>ID</td>
+          <td>TITLE</td>
+          <td>ALBUM</td>
+          <td>ARTIST</td>
+          <td>GENRE</td>
+          <td>RELEASE DATE</td>
+          <td>DELETE?</td>
         </tr>
       </table>
       </div>
