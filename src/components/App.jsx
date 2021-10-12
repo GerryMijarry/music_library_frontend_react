@@ -29,6 +29,26 @@ class App extends Component {
         
     }
 
+    sortSongsByTitle = () => {
+        this.setState({songs: this.state.songs.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()))});
+    }
+
+    sortSongsByAlbum = () => {
+        this.setState({songs: this.state.songs.sort((a, b) => a.album.toLowerCase().localeCompare(b.album.toLowerCase()))});
+    }
+
+    sortSongsByArtist = () => {
+        this.setState({songs: this.state.songs.sort((a, b) => a.artist.toLowerCase().localeCompare(b.artist.toLowerCase()))});
+    }
+
+    sortSongsByGenre = () => {
+        this.setState({songs: this.state.songs.sort((a, b) => a.genre.toLowerCase().localeCompare(b.genre.toLowerCase()))});
+    }
+
+    sortSongsByRealeaseDate = () => {
+        this.setState({songs: this.state.songs.sort((a,b)=>a.getTime()-b.getTime())});
+    }
+
     deleteSong = async (songId) => {
         let response = await axios.delete('http://127.0.0.1:8000/music/' + songId + '/')
         this.getAllSongs(); 
@@ -47,8 +67,8 @@ class App extends Component {
     render() {
         return (
             <div className="container-fluid">
-                <TableHeader getSongs={this.getAllSongs}/>
-                <SongTable songs={this.state.songs}  deleteASong={this.deleteSong}/>
+                <TableHeader sortByTitle={this.sortSongsByTitle} sortByAlbum={this.sortSongsByAlbum} sortByArtist={this.sortSongsByArtist} sortByGenre={this.sortSongsByGenre}/>
+                <SongTable songs={this.state.songs}  deleteASong={this.deleteSong} sortByTitle={this.sortSongsByTitle}/>
                 <SongCreateForm createASong={this.createSong}/>
             </div>
         )

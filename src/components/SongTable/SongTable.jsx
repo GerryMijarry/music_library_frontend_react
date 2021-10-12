@@ -23,7 +23,7 @@ class SongTable extends Component {
             <form onSubmit={this.deleteSubmit}>
             <table>
             <tr>
-              <input readOnly name="song_id" value={item.id}/>
+              <td><input readOnly name="song_id" value={item.id}/></td>
               <td>{item.title}</td>
               <td>{item.album}</td>
               <td>{item.artist}</td>
